@@ -1,0 +1,37 @@
+{
+  "name": "@kokotree-inc/videojs-upnext-plugin",
+  "version": "1.0.12",
+  "description": "Video.js UpNext plugin that enables auto-play of next video and shows an end card after the main video has ended.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "webpack --mode production",
+    "publish:yalc": "npm run build & yalc publish",
+    "build:dev": "webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kokotree-Inc/videojs-upnext-plugin.git"
+  },
+  "keywords": [
+    "videojs",
+    "upnext"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kokotree-Inc/videojs-upnext-plugin/issues"
+  },
+  "homepage": "https://github.com/Kokotree-Inc/videojs-upnext-plugin#readme",
+  "devDependencies": {
+    "ts-loader": "^9.4.2",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.3",
+    "webpack-cli": "^5.1.0",
+    "video.js": "^7.21.1"
+  },
+  "dependencies": {
+    "@types/node": "^20.1.0",
+    "@types/video.js": "^7.3.51"
+  }
+}
