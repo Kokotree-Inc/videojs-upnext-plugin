@@ -5,7 +5,7 @@ const Plugin = videojs.getPlugin('plugin');
 
 export class VideoJsUpnextPlugin extends Plugin {
   // Include the version number.
-  VERSION = PLUGIN_VERSION;
+  public static VERSION = PLUGIN_VERSION;
 
   defaultOptions: VideoJsUpnextPluginOptions = {
     title: '',
