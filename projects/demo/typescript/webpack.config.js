@@ -22,13 +22,18 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [{ from: 'src/index.html', to: 'index.html' }]
+      patterns: [
+        { from: 'src/index.html', to: 'index.html' },
+        { from: 'src/index.css', to: 'index.css' },
+        { from: 'src/upnext-styles.css', to: 'upnext-styles.css' }
+      ]
     })
   ],
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist')
     },
-    port: 3000
+    port: 3000,
+    watchFiles: ['src/**/*']
   }
 };

@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -24,6 +25,11 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js']
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'src/upnext-styles.css', to: 'upnext-styles.css' }]
+    })
+  ],
   module: {
     rules: [
       {
