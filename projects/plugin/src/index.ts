@@ -9,7 +9,7 @@ export class VideoJsUpnextPlugin extends Plugin {
 
   defaultOptions: VideoJsUpnextPluginOptions = {
     title: '',
-    interval: 10
+    interval: 100
   };
 
   constructor(player: VideoJsPlayer, options?: VideoJsUpnextPluginOptions) {

@@ -1,6 +1,6 @@
 {
   "name": "@kokotree-inc/videojs-upnext-plugin",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "description": "Video.js UpNext plugin that enables auto-play of next video and shows an end card after the main video has ended.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -14,8 +14,8 @@
     "watch:webpack:dev": "webpack --mode development --watch",
     "publish:yalc": "yalc publish && test -e tmp/build.version || touch tmp/build.version && date > tmp/build.version",
     "watch:dist": "onchange 'dist/**/*' -- npm run publish:yalc",
-    "watch:dev": "concurrently \"npm run watch:webpack:dev\" \"npm run watch:dist\"",
-    "watch": "concurrently \"npm run watch:webpack\" \"npm run watch:dist\""
+    "watch:dev": "concurrently \"npm run prebuild\"  \"npm run watch:webpack:dev\" \"npm run watch:dist\"",
+    "watch": "concurrently \"npm run prebuild\" \"npm run watch:webpack\" \"npm run watch:dist\""
   },
   "repository": {
     "type": "git",
@@ -35,12 +35,12 @@
     "onchange": "^7.1.0",
     "ts-loader": "^9.4.2",
     "tslint": "^6.1.3",
-    "typescript": "^4.2.3",
+    "typescript": "^5.0.4",
     "video.js": "^7.21.1",
     "webpack-cli": "^5.1.0"
   },
   "dependencies": {
-    "@types/node": "^20.1.0",
+    "@types/node": "^20.1.1",
     "@types/video.js": "^7.3.51"
   }
 }
