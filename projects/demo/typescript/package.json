@@ -7,15 +7,16 @@
     "build": "webpack --mode development",
     "start": "webpack serve",
     "build-and-start": "npm i & npm run build & npm run start",
-    "build-and-start:yalc": " yalc update & npm i & npm run build & npm run start"
+    "build-and-start:yalc": "yalc update & npm i & npm run build & npm run start",
+    "watch": "nodemon --watch \"../../plugin/tmp/build.version\" --exec \"npm run build-and-start:yalc\""
   },
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.0.2",
-    "@rollup/plugin-typescript": "^11.1.0",
     "@types/video.js": "^7.3.51",
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.1",
+    "nodemon": "^2.0.22",
+    "onchange": "^7.1.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.4",
     "video.js": "^7.21.1",
@@ -25,7 +26,6 @@
   },
   "dependencies": {
     "@kokotree-inc/videojs-upnext-plugin": "file:.yalc/@kokotree-inc/videojs-upnext-plugin",
-    "video.js": "^7.21.1",
-    "videojs-seek-buttons": "^3.0.1"
+    "video.js": "^7.21.1"
   }
 }

@@ -12,7 +12,7 @@ player.autoplay(true);
 //   label: 'LLL',
 //   message: 'MMM'
 // };
-player.upnext({ title: 'My awesome video', interval: 50 });
+player.upnext({ title: 'My awesome video' });
 
 player.on('ready', () => {
   console.log('ready');

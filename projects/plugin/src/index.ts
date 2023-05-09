@@ -1,18 +1,44 @@
 import videojs, { VideoJsPlayer } from 'video.js';
-// import { version as VERSION } from '../package.json';
+import { PLUGIN_VERSION } from './version';
 
 const Plugin = videojs.getPlugin('plugin');
 
 export class VideoJsUpnextPlugin extends Plugin {
   // Include the version number.
-  //   VERSION = VERSION;
+  VERSION = PLUGIN_VERSION;
+
+  defaultOptions: VideoJsUpnextPluginOptions = {
+    title: '',
+    interval: 10
+  };
+
   constructor(player: VideoJsPlayer, options?: VideoJsUpnextPluginOptions) {
     super(player);
-    player.ready(() => {
-      console.log('VideoJsUpnextPlugin is ready');
-      console.log('options', options);
-    });
+    const mergedOptions = videojs.mergeOptions(this.defaultOptions, options);
+
+    player.ready(() => this.onPlayerReady(player, mergedOptions));
+
+    player.on('ended', () => this.onVideoEnded(player));
   }
+
+  onPlayerReady = (player: VideoJsPlayer, options: VideoJsUpnextPluginOptions) => {
+    console.log('onPlayerReady mergedOptions', options);
+    player.addClass('vjs-upnext');
+  };
+
+  onVideoEnded = (player: VideoJsPlayer) => {
+    console.log('Player ended');
+
+    player.addClass('vjs-upnext--showing');
+    // const endCard = player.getChild('endCard');
+    // endCard.showCard((canceled) => {
+    //   player.removeClass('vjs-upnext--showing');
+    //   if (!canceled) {
+    //     // Load the next video
+    //     // ...
+    //   }
+    // });
+  };
 }
 
 videojs.registerPlugin('upnext', VideoJsUpnextPlugin);

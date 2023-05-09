@@ -134,3 +134,4 @@ dist
 yalc.lock
 .yalc-lock.json
 .yalc-cache
+projects/plugin/tmp
