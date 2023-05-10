@@ -140,6 +140,9 @@ export class UpnextCard extends Component {
 
     const playNextContainer = upnextContainer.querySelector(controlSelectors.upnextPlayContainer);
     if (playNextContainer) {
+      // Cancel the timeout using the ID
+      clearTimeout(timeoutId);
+
       playNextContainer.addEventListener('click', () => {
         console.log('Play next clicked');
         playNext(upnextContainer);
