@@ -128,7 +128,8 @@
 }
 
 .video-js .vjs-upnext-container .vjs-upnext-progress-container svg .vjs-upnext-progress-circle-background {
-  fill: #0008;
+  fill: #000;
+  opacity: 0.7;
 }
 
 .video-js .vjs-upnext-container svg .vjs-upnext-progress-circle-background,

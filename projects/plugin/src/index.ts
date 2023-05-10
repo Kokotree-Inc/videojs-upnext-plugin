@@ -77,6 +77,13 @@ export class UpnextCard extends Component {
   };
 
   /**
+   * The ID of the current timeout that is waiting to execute.
+   *
+   * @type {any}
+   */
+  private timeoutId: any;
+
+  /**
    * Constructs a new instance of the UpnextCard component.
    * @param videoJsPlayer - The video.js player instance.
    * @param pluginOptions - The options for the upnext plugin.
@@ -107,6 +114,7 @@ export class UpnextCard extends Component {
   private removeUpnextControl = (upnextContainer: HTMLDivElement) => {
     upnextContainer.remove();
     this.toggleControls(true);
+    clearTimeout(this.timeoutId);
   };
 
   /**
@@ -143,7 +151,7 @@ export class UpnextCard extends Component {
     circle.style.setProperty('--progress-animation-duration', `${pluginOptions.interval}s`);
 
     // Start the countdown timer until the next video plays
-    const timeoutId = setTimeout(() => {
+    this.timeoutId = setTimeout(() => {
       playNext(upnextContainer);
     }, pluginOptions.interval * 1000);
 
@@ -156,7 +164,7 @@ export class UpnextCard extends Component {
     const nextClose = upnextContainer.querySelector(controlSelectors.upnextCancel);
     if (nextClose) {
       // Cancel the timeout using the ID
-      clearTimeout(timeoutId);
+
       nextClose.addEventListener('click', () => {
         console.log('Close clicked');
         pluginOptions.cancel();
@@ -168,7 +176,6 @@ export class UpnextCard extends Component {
     const playNextContainer = upnextContainer.querySelector(controlSelectors.upnextPlayContainer);
     if (playNextContainer) {
       // Cancel the timeout using the ID
-      clearTimeout(timeoutId);
       playNextContainer.addEventListener('click', () => {
         console.log('Play next clicked');
         playNext(upnextContainer);
