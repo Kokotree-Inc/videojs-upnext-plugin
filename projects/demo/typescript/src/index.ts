@@ -17,7 +17,7 @@ const player = videojs('video', {
 player.autoplay(true);
 
 player.upnext({
-  interval: 25,
+  interval: 10,
   headText: 'Up Next',
   cancelText: 'Cancel',
   getTitle: () => {

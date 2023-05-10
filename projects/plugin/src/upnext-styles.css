@@ -126,7 +126,7 @@
 }
 
 .video-js .vjs-upnext-container .vjs-upnext-progress-container svg .vjs-upnext-progress-circle-background {
-  fill: #0007;
+  fill: #0008;
 }
 
 .video-js .vjs-upnext-container svg .vjs-upnext-progress-circle-background,
@@ -142,4 +142,16 @@
 
 .video-js .vjs-upnext-container svg .vjs-upnext-progress-circle {
   stroke: #fff;
+}
+
+.video-js .vjs-upnext-container svg .vjs-upnext-progress-circle {
+  stroke-dasharray: 251.2;
+  stroke-dashoffset: 251.2;
+  animation: progress-animation var(--progress-animation-duration) linear forwards;
+}
+
+@keyframes progress-animation {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

@@ -70,6 +70,17 @@ body {
   height: 100%;
 }
 
+.video-js .vjs-upnext-container svg .vjs-upnext-progress-circle {
+  stroke-dasharray: 251.2;
+  stroke-dashoffset: 251.2;
+  animation: progress-animation var(--progress-animation-duration) linear forwards;
+}
+
+@keyframes progress-animation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 /* Up Next
 
 .video-js .vjs-upnext-overlay {

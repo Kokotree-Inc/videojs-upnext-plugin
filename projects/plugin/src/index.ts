@@ -30,7 +30,7 @@ const getUpnextTemplate = (options: VideoJsUpnextPluginOptions) => {
     `;
 };
 
-export class EndCard extends Component {
+export class UpnextCard extends Component {
   videoJsPlayer: VideoJsPlayer;
   pluginOptions: VideoJsUpnextPluginOptions;
 
@@ -49,11 +49,13 @@ export class EndCard extends Component {
     this.videoJsPlayer = videoJsPlayer;
     this.pluginOptions = pluginOptions;
     this.on(this.videoJsPlayer, 'ended', this.handleVideoEnded);
-
-    // this.handleVideoEnded();
+    // setTimeout(() => {
+    //   this.handleVideoEnded();
+    // }, 2000);
   }
 
   private toggleControls = (enabled: boolean) => {
+    console.log('toggleControls', enabled);
     this.videoJsPlayer.controls(enabled);
   };
 
@@ -62,35 +64,45 @@ export class EndCard extends Component {
     this.toggleControls(true);
   };
 
-  private animateProgressCircle = (duration: number) => {
-    const circle = document.getElementById(this.controlSelectors.upnextProgressCircle) as SVGCircleElement | null;
-    if (!circle) {
-      return;
-    }
+  // private animateProgressCircle = (duration: number, upnextContainer: HTMLDivElement) => {
+  //   const { playNext } = this;
+  //   const circle = document.getElementById(this.controlSelectors.upnextProgressCircle) as SVGCircleElement | null;
+  //   if (!circle) {
+  //     return;
+  //   }
 
-    const circumference = circle.r.baseVal.value * 2 * Math.PI;
-    circle.style.strokeDasharray = `${circumference} ${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
-    console.log('Animation working');
-    const animation = (timestamp: number) => {
-      const progress = timestamp / 1000;
-      circle.style.strokeDashoffset = `${circumference - (circumference * progress) / duration}`;
+  //   const circumference = circle.r.baseVal.value * 2 * Math.PI;
+  //   circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  //   circle.style.strokeDashoffset = `${circumference}`;
+  //   console.log('Animation working');
 
-      if (progress < duration) {
-        window.requestAnimationFrame(animation);
-      } else {
-        console.log('Animation finished');
-        this.pluginOptions.playNext();
-      }
-    };
+  //   const animation = (timestamp: number) => {
+  //     const progress = timestamp / 1000;
+  //     circle.style.strokeDashoffset = `${circumference - (circumference * progress) / duration}`;
+  //     // console.log('circle.style.strokeDashoffset:' + circle.style.strokeDashoffset);
+  //     if (progress < duration) {
+  //       window.requestAnimationFrame(animation);
+  //     } else {
+  //       console.log('Animation finished');
+  //       playNext(upnextContainer);
+  //     }
+  //   };
+  //   // window.requestAnimationFrame(animation);
 
-    window.requestAnimationFrame(animation);
+  //   window.requestAnimationFrame(animation);
+  // };
+
+  private playNext = (upnextContainer: HTMLDivElement) => {
+    const { pluginOptions, removeUpnextControl } = this;
+
+    pluginOptions.playNext();
+    removeUpnextControl(upnextContainer);
   };
 
   private handleVideoEnded = () => {
     console.log('Video ended');
 
-    const { videoJsPlayer, pluginOptions, toggleControls, removeUpnextControl, controlSelectors } = this;
+    const { videoJsPlayer, pluginOptions, toggleControls, removeUpnextControl, controlSelectors, playNext } = this;
 
     const upnextContainer = document.createElement('div');
     upnextContainer.innerHTML = getUpnextTemplate(pluginOptions);
@@ -99,9 +111,18 @@ export class EndCard extends Component {
 
     videoJsPlayer.el().appendChild(upnextContainer);
 
-    console.log('animateProgressCircle');
+    const circle = document.getElementById(this.controlSelectors.upnextProgressCircle) as SVGCircleElement | null;
+    if (!circle) {
+      return;
+    }
 
-    this.animateProgressCircle(pluginOptions.interval);
+    circle.style.setProperty('--progress-animation-duration', `${pluginOptions.interval}s`);
+
+    setTimeout(() => {
+      playNext(upnextContainer);
+    }, pluginOptions.interval * 1000);
+
+    console.log('animateProgressCircle');
 
     toggleControls(false);
 
@@ -118,14 +139,15 @@ export class EndCard extends Component {
     if (playNextContainer) {
       playNextContainer.addEventListener('click', () => {
         console.log('Play next clicked');
-        pluginOptions.playNext();
-        removeUpnextControl(upnextContainer);
+        playNext(upnextContainer);
       });
     }
+
+    // this.animateProgressCircle(pluginOptions.interval, upnextContainer);
   };
 }
 
-videojs.registerComponent('EndCard', EndCard);
+videojs.registerComponent('UpnextCard', UpnextCard);
 
 export class VideoJsUpnextPlugin extends Plugin {
   // Include the version number.
@@ -161,7 +183,7 @@ export class VideoJsUpnextPlugin extends Plugin {
     console.log('onPlayerReady mergedOptions', options);
 
     // Create an instance of EndCard and add it to the player.
-    const endCard = new EndCard(player, options, {});
+    const endCard = new UpnextCard(player, options, {});
     player.addChild(endCard);
   };
 }
