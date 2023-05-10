@@ -118,7 +118,7 @@ export class UpnextCard extends Component {
 
     circle.style.setProperty('--progress-animation-duration', `${pluginOptions.interval}s`);
 
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       playNext(upnextContainer);
     }, pluginOptions.interval * 1000);
 
@@ -128,6 +128,9 @@ export class UpnextCard extends Component {
 
     const nextClose = upnextContainer.querySelector(controlSelectors.upnextCancel);
     if (nextClose) {
+      // Cancel the timeout using the ID
+      clearTimeout(timeoutId);
+
       nextClose.addEventListener('click', () => {
         console.log('Close clicked');
         pluginOptions.cancel();
