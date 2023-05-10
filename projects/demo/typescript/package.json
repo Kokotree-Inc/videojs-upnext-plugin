@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode development",
+    "build": "webpack --mode production --no-watch",
     "start": "webpack serve",
     "build-and-start": "npm i & npm run build & npm run start",
-    "build-and-start:yalc": "yalc update & npm i & npm run build & npm run start",
-    "watch": "nodemon --watch \"../../plugin/tmp/build.version\" --exec \"npm run build-and-start:yalc\""
+    "update:yalc": "echo Updating yalc &&  yalc update & npm i && webpack --mode production --no-watch",
+    "watch:dist": "nodemon --watch \"build.version\" --exec \"npm run update:yalc\"",
+    "watch": "concurrently \"npm run update:yalc\" \"npm run build-and-start\" \"npm run watch:dist\""
   },
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^8.0.1",
     "@types/video.js": "^7.3.51",
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.1",

@@ -1,5 +1,6 @@
 import videojs, { VideoJsPlayer } from 'video.js';
 import { PLUGIN_VERSION } from './version';
+import './upnext-styles.css';
 
 const Plugin = videojs.getPlugin('plugin');
 const Component = videojs.getComponent('Component');
@@ -7,13 +8,13 @@ const Component = videojs.getComponent('Component');
 const getUpnextTemplate = (options: VideoJsUpnextPluginOptions) => {
   return `
 <div class="vjs-upnext-overlay"></div>
-<div class="vjs-upnext-container">
+<div class="vjs-upnext-container">  
  
   <div class="vjs-upnext-header-container"><span class="vjs-upnext-header-title">${options.headText}</span></div>
   <div class="vjs-play-next-container">
     <div class="vjs-play-next-banner-container">
       <div class="img"></div>
-    </div>
+    </div> 
     <div class="vjs-upnext-title">${options.getTitle()}</div>
     <div class="vjs-upnext-progress-container">
       <svg viewBox="0 0 90 90" preserveAspectRatio="xMinYMin meet">
@@ -21,12 +22,12 @@ const getUpnextTemplate = (options: VideoJsUpnextPluginOptions) => {
         <circle id="vjs-upnext-progress-circle" class="vjs-upnext-progress-circle" cx="40" cy="40" r="40"></circle>
           <svg viewBox="0 0 24 24" width="60" height="80">
             <path transform="rotate(90 12 12) translate(1,-4)" fill="#fff" d="M8 5v14l11-7z"></path>
-          </svg>
-      </svg>
-    </div>
+          </svg>          
+      </svg> 
+    </div>    
   </div>
    <div class="vjs-upnext-cancel-button"><a title="${options.cancelText}">x</a></div>
-</div>
+</div> 
     `;
 };
 
@@ -48,10 +49,8 @@ export class UpnextCard extends Component {
 
     this.videoJsPlayer = videoJsPlayer;
     this.pluginOptions = pluginOptions;
+
     this.on(this.videoJsPlayer, 'ended', this.handleVideoEnded);
-    // setTimeout(() => {
-    //   this.handleVideoEnded();
-    // }, 2000);
   }
 
   private toggleControls = (enabled: boolean) => {
@@ -63,34 +62,6 @@ export class UpnextCard extends Component {
     upnextContainer.remove();
     this.toggleControls(true);
   };
-
-  // private animateProgressCircle = (duration: number, upnextContainer: HTMLDivElement) => {
-  //   const { playNext } = this;
-  //   const circle = document.getElementById(this.controlSelectors.upnextProgressCircle) as SVGCircleElement | null;
-  //   if (!circle) {
-  //     return;
-  //   }
-
-  //   const circumference = circle.r.baseVal.value * 2 * Math.PI;
-  //   circle.style.strokeDasharray = `${circumference} ${circumference}`;
-  //   circle.style.strokeDashoffset = `${circumference}`;
-  //   console.log('Animation working');
-
-  //   const animation = (timestamp: number) => {
-  //     const progress = timestamp / 1000;
-  //     circle.style.strokeDashoffset = `${circumference - (circumference * progress) / duration}`;
-  //     // console.log('circle.style.strokeDashoffset:' + circle.style.strokeDashoffset);
-  //     if (progress < duration) {
-  //       window.requestAnimationFrame(animation);
-  //     } else {
-  //       console.log('Animation finished');
-  //       playNext(upnextContainer);
-  //     }
-  //   };
-  //   // window.requestAnimationFrame(animation);
-
-  //   window.requestAnimationFrame(animation);
-  // };
 
   private playNext = (upnextContainer: HTMLDivElement) => {
     const { pluginOptions, removeUpnextControl } = this;
@@ -148,8 +119,6 @@ export class UpnextCard extends Component {
         playNext(upnextContainer);
       });
     }
-
-    // this.animateProgressCircle(pluginOptions.interval, upnextContainer);
   };
 }
 

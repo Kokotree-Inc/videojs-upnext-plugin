@@ -25,7 +25,7 @@ module.exports = {
       patterns: [
         { from: 'src/index.html', to: 'index.html' },
         { from: 'src/index.css', to: 'index.css' },
-        { from: 'src/upnext-styles.css', to: 'upnext-styles.css' }
+        { from: 'src/upnext-styles.min.css', to: 'upnext-styles.min.css' }
       ]
     })
   ],
