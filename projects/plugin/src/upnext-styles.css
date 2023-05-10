@@ -1,4 +1,6 @@
-/* Up Next */
+/**
+ * Styles for the upnext overlay and container.
+ */
 
 .video-js .vjs-upnext-overlay {
   position: absolute;

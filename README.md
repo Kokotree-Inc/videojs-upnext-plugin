@@ -15,21 +15,58 @@ Run `npm install @kokotree-inc/videojs-upnext-plugin` to install the plugin.
 
 To use this plugin, simply import it and register it with your video.js player instance:
 
+To use this plugin, simply import it and register it with your video.js player instance:
+
+index.js
+
 ```javascript
 import videojs from 'video.js';
 import '@kokotree-inc/videojs-upnext-plugin';
 
-const player = videojs('my-player', {
-  plugins: {
-    upnext: {
-      title: 'My awesome video',
-      interval: 50
-    }
+const player = videojs('my-player');
+
+player.upnext({
+  interval: 10,
+  headText: 'Up Next',
+  cancelText: 'Cancel',
+  getTitle: () => {
+    return 'Ocean Life';
+  },
+  getVideoImageUrl: () => {
+    return 'https://vjs.zencdn.net/v/oceans.png';
+  },
+  playNext: () => {
+    console.log('playNext');
+  },
+  cancel: () => {
+    console.log('cancel');
   }
 });
-
-player.autoplay(true);
 ```
+
+HTML
+
+```html
+<html>
+  <head>
+    <link href="http://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
+
+    <link href="index.css" rel="stylesheet" />
+    <link href="upnext-styles.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="vid-container">
+      <div
+        class="video-js vjs-default-skin video-js-upnext-demo-player vjs-fluid video-js-upnext-demo-player-video-dimensions vjs-controls-enabled">
+        <video id="video" controls></video>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
+```
+
+You can get upnext-styles.min.css from the dist folder of this package.
 
 ## Test the plugin locally with demo project in this repository
 
@@ -65,7 +102,7 @@ npm install -g yalc
 
 1. Clone this repository and navigate to the `projects/plugin` directory.
 2. Run `npm install` to install the package's dependencies.
-3. Run `npm run watch:dev` to build the TypeScript files.
+3. Run `npm run watch` to build the TypeScript files.
 4. Navigate to the `projects/demo/typescript` directory and run `npm install` to install the consumer project's dependencies.
 5. Run `yalc add @kokotree-inc/videojs-upnext-plugin` to add the package to the consumer project. (Next time you have to
 6. Run `npm run watch` to start the demo project. It will open a browser window at `http://192.168.0.100:3000/`.
