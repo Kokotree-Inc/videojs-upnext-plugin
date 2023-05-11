@@ -1,0 +1,57 @@
+{
+  "name": "@kokotree-inc/videojs-upnext-plugin",
+  "version": "1.0.90",
+  "description": "Video.js UpNext plugin that enables auto-play of next video and shows an end card after the main video has ended.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "prebuild": "echo Running pre build && node -p \"'export const PLUGIN_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts && test -e tmp/build.version || touch tmp/build.version && date > tmp/build.version",
+    "build": "webpack --mode production --no-watch",
+    "publish:yalc": "yalc publish",
+    "copy:build-version-to-demo": "echo Copying build.version && cp -f tmp/build.version ../demo/typescript/src/build.version",
+    "copy:css": "echo Copying upnext-styles.min.css && cp -f dist/upnext-styles.min.css ../demo/typescript/src/upnext-styles.min.css",
+    "publish-yalc-and-copy-css": "npm run publish:yalc && npm run copy:css",
+    "change": "echo Files Changed && npm run prebuild && echo Starting Webpack && webpack --mode production --no-watch && wait-on dist && npm run publish-yalc-and-copy-css && npm run copy:build-version-to-demo",
+    "watch": "npm run prebuild && webpack --mode production --no-watch && onchange --exclude 'src/tmp' --exclude 'src/version.ts' 'package.json' 'src' -- npm run change",
+    "doc": "typedoc src/index.ts",
+    "prepublish": "rm -f dist/build.version dist/version.d.ts && cp package.json dist/package.json && cp docs/README.md dist/README.md",
+    "publish-lib": "npm run build && npm run prepublish && cd ./dist && npm publish --access=public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kokotree-Inc/videojs-upnext-plugin.git"
+  },
+  "keywords": [
+    "videojs",
+    "upnext"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kokotree-Inc/videojs-upnext-plugin/issues"
+  },
+  "homepage": "https://github.com/Kokotree-Inc/videojs-upnext-plugin#readme",
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "css-minimizer-webpack-plugin": "^5.0.0",
+    "mini-css-extract-plugin": "^2.7.5",
+    "nodemon": "^2.0.22",
+    "onchange": "^7.1.0",
+    "postcss-loader": "^7.3.0",
+    "sass-loader": "^13.2.2",
+    "terser-webpack-plugin": "^5.3.8",
+    "ts-loader": "^9.4.2",
+    "tslint": "^6.1.3",
+    "typedoc": "^0.24.7",
+    "typescript": "^5.0.4",
+    "video.js": "^7.21.1",
+    "wait-on": "^7.0.1",
+    "webpack-cli": "^5.1.0"
+  },
+  "dependencies": {
+    "@types/node": "^20.1.1",
+    "@types/video.js": "^7.3.51"
+  }
+}
