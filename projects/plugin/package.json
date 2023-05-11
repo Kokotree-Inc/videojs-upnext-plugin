@@ -1,6 +1,6 @@
 {
   "name": "@kokotree-inc/videojs-upnext-plugin",
-  "version": "1.0.91",
+  "version": "1.0.92",
   "description": "Video.js UpNext plugin that enables auto-play of next video and shows an end card after the main video has ended.",
   "main": "dist/index.js",
   "module": "dist/index.js",
