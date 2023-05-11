@@ -1,0 +1,14 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "member-access": true,
+    "member-ordering": [true, { "order": "fields-first" }],
+    "no-console": false,
+    "comment-format": [true, "check-space"],
+    "no-empty-interface": true
+  },
+  "rulesDirectory": []
+}
