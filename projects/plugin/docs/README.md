@@ -2,7 +2,7 @@
 
 A plugin for [video.js](https://videojs.com/) that displays an "Up Next" overlay when a video finishes playing.
 
-![Preview](https://raw.githubusercontent.com/Kokotree-Inc/videojs-upnext-plugin/assets/images/preview.gif)
+![Preview](https://github.com/Kokotree-Inc/videojs-upnext-plugin/blob/1b47bcb78d9c9d320f3424be2845998a32c38c69/assets/images/preview.gif?raw=true)
 
 ## Installation
 
