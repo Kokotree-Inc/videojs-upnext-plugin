@@ -2,6 +2,8 @@
 
 Video.js Upnext plugin that enables auto-play of next video and shows an end card after the main video has ended.
 
+![Preview](https://raw.githubusercontent.com/Kokotree-Inc/videojs-upnext-plugin/assets/images/preview.gif)
+
 This repository contains two projects:
 
 1. `projects/plugin` - The plugin itself
