@@ -51,7 +51,7 @@ HTML
 ```html
 <html>
   <head>
-    <link href="http://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
+    <link href="http://vjs.zencdn.net/8.9.0/video-js.css" rel="stylesheet" />
 
     <link href="index.css" rel="stylesheet" />
     <link href="upnext-styles.min.css" rel="stylesheet" />
