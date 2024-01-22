@@ -16,7 +16,7 @@ const player = videojs('video', {
 });
 player.autoplay(true);
 
-player.upnext({
+(player as any).upnext({
   interval: 10,
   headText: 'Up Next',
   cancelText: 'Cancel',

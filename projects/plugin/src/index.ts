@@ -1,4 +1,5 @@
 import videojs, { VideoJsPlayer } from 'video.js';
+
 import { PLUGIN_VERSION } from './version';
 import './upnext-styles.css';
 
